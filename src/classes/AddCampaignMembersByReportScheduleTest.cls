@@ -8,6 +8,8 @@ private class AddCampaignMembersByReportScheduleTest {
     /**
      * The Report object is read-only in Apex. It must be created via Metadata API.
      * Therefore our test relies on existing data being available to us, unfortunately.
+     * Also, when testing Reports API the test will run with SeeAllData = true, regardless the annotation here.
+     * I include the annotation for clarity.
      * https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_analytics_test_reports.htm
      */
     @isTest( seeAllData = true )
@@ -19,15 +21,15 @@ private class AddCampaignMembersByReportScheduleTest {
 
         System.assert( reportList.size() > 0, 'Please create a Contact report that includes the Contact ID field and save the report with unique name Add_Contacts_To_Campaign_Test' );
 
-        Campaign c = new Campaign(
+        Campaign camp = new Campaign(
             name = 'Test Campaign',
             isActive = true
         );
 
-        insert c;
+        insert camp;
 
         String reportId = String.valueOf( reportList[0].id ).left( 15 );
-        String campaignId = String.valueOf( c.id ).left( 15 );
+        String campaignId = String.valueOf( camp.id ).left( 15 );
 
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
 
@@ -44,6 +46,14 @@ private class AddCampaignMembersByReportScheduleTest {
 
             insert setting;
 
+        } else {
+
+            setting.campaign_id__c = campaignId;
+            setting.report_contact_or_lead_id_column_label__c = 'Contact ID';
+            setting.campaign_member_added_status__c = null;
+
+            update setting;
+
         }
 
         Test.startTest();
@@ -53,6 +63,9 @@ private class AddCampaignMembersByReportScheduleTest {
         System.schedule( 'AddCampaignMembersJob-' + DateTime.now().getTime(), cron, new AddCampaignMembersByReportSchedulable() );
 
         Test.stopTest();
+
+        // Note, this only tests that the schedule runs
+        // Salesforce won't actually invoke the batchable to assert side effects
 
     }
 
