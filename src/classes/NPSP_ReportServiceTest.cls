@@ -60,23 +60,14 @@ private class NPSP_ReportServiceTest {
 
     @isTest(SeeAllData=True)
     public static void testReportIterator() {
-        Map<Id, Account> testAccounts = new Map<Id, Account>([
-            SELECT Id
-            FROM Account
-            ORDER BY Id
-            LIMIT 2000
-        ]);
 
-/*
-        if (testContacts.size() != 2500) {
-            // We do not have the test data that we need
-            // in this org, so we are not going to run
-            // this test
-            return;
-        }
-*/
+        Account acct = new Account(
+            name = 'NPSP Test Account'
+        );
 
-        Set<Id> expectedIds = testAccounts.keySet();
+        insert acct;
+
+        Set<Id> expectedIds = new Set<Id>{ acct.id };
 
         Report testReport = [
             SELECT Id

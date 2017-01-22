@@ -16,6 +16,14 @@
         <field>USERS.NAME</field>
     </columns>
     <description>For report automation solutions by Doug Ayers (https://douglascayers.com)</description>
+    <filter>
+        <criteriaItems>
+            <column>ACCOUNT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>NPSP Test Account</value>
+        </criteriaItems>
+    </filter>
     <format>Tabular</format>
     <name>NPSP_Test_Account_Report</name>
     <params>
@@ -27,6 +35,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <interval>INTERVAL_TODAY</interval>
     </timeFrameFilter>
 </Report>
