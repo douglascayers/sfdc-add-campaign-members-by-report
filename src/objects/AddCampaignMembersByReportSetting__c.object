@@ -16,6 +16,18 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Campaign_Member_Added_Status__c</fullName>
+        <description>The Campaign Member Status to use if a contact or lead is being added new to the campaign (does not already exist as a member). If blank then Salesforce will use the default configured on the Campaign.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Campaign Member Status to use if a contact or lead is being added new to the campaign (does not already exist as a member). If blank then Salesforce will use the default configured on the Campaign.</inlineHelpText>
+        <label>Campaign Member Added Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Report_Contact_or_Lead_ID_Column_Label__c</fullName>
         <description>The column label on the report that holds the contact or lead record id to add to the campaign. The report should only include at most one column with this label heading and the value must be the record id (not a text or formula field). Example, if the column label is &quot;Contact ID&quot; that report field must either pull from the Contact ID field (Contact.Id) or a lookup field to Contact object like OpportunityContactRole.ContactId. Same applies for Lead ID report columns.</description>
         <externalId>false</externalId>
