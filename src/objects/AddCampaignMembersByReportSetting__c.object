@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Designed to match report id&apos;s to campaign id&apos;s. Used by apex report notification classes or scheduleable apex to automate adding contacts or leads from a report to a campaign when the report runs. The &apos;Name&apos; of each custom setting record must be the 15 character ID of the saved report that includes the contact or lead record ids to add as campaign members. The apex code looks up this campaign ID cross-reference based on the report it is subscribed to.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Campaign_ID__c</fullName>
+        <description>The 15 character campaign id, usually copied from the end of the URL of the campaign record.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The 15 character campaign id, usually copied from the end of the URL of the campaign record.</inlineHelpText>
+        <label>Campaign ID</label>
+        <length>15</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Report_Contact_or_Lead_ID_Column_Label__c</fullName>
+        <description>The column label on the report that holds the contact or lead record id to add to the campaign. The report should only include at most one column with this label heading and the value must be the record id (not a text or formula field). Example, if the column label is &quot;Contact ID&quot; that report field must either pull from the Contact ID field (Contact.Id) or a lookup field to Contact object like OpportunityContactRole.ContactId. Same applies for Lead ID report columns.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The column label on the report that holds the contact or lead record id to add to the campaign. The report should only include at most one column with this label heading and the value must be the record id or lookup field (not a text or formula field).</inlineHelpText>
+        <label>Report Contact or Lead ID Column Label</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Add Campaign Members by Report Setting</label>
+    <visibility>Public</visibility>
+</CustomObject>
