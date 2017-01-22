@@ -9,7 +9,7 @@ public with sharing class AddCampaignMembersByReportService {
      * Optionally, you may specify the default campaign member status to use. If blank then none will be specified and Salesforce default will be used.
      * Returns the list of newly inserted campaign members, if any.
      */
-    public static List<CampaignMember> addMembersToCampaign( List<ID> leadOrContactIds, ID campaignId, String campaignMemberStatus ) {
+    public List<CampaignMember> addMembersToCampaign( List<ID> leadOrContactIds, ID campaignId, String campaignMemberStatus ) {
 
         System.debug( 'adding members to campaign: campaignId=' + campaignId + ', campaignMemberStatus=' + campaignMemberStatus + ', leadOrContactIds=' + leadOrContactIds );
 
@@ -61,6 +61,8 @@ public with sharing class AddCampaignMembersByReportService {
         if ( membersToInsert.size() > 0 ) {
             insert membersToInsert;
         }
+
+        System.debug( 'added ' + membersToInsert.size() + ' new members to campaign ' + campaignId );
 
         return membersToInsert;
     }
