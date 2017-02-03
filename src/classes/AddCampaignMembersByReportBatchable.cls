@@ -31,12 +31,7 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
         }
 
         Reports.ReportExtendedMetadata metadata = Reports.ReportManager.describeReport( reportId ).getReportExtendedMetadata();
-        Map<String, String> columnLabelsToNamesMap = getIdColumnNamesByLabelsMap( metadata );
-
-        if ( columnLabelsToNamesMap == null ) {
-            throw new AddCampaignMembersByReportException( 'Report with id "' + reportId + '" is missing columns that reference record ids like Contact.Id or Lead.Id' );
-        }
-
+        Map<String, String> columnLabelsToNamesMap = getColumnNamesByLabelsMap( metadata );
         String columnName = columnLabelsToNamesMap.get( setting.report_contact_or_lead_id_column_label__c );
 
         if ( String.isBlank( columnName ) ) {
@@ -84,9 +79,9 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
 
     // ----------------------------------------------------
 
-    private Map<String, String> getIdColumnNamesByLabelsMap( Reports.ReportExtendedMetadata metadata ) {
+    private Map<String, String> getColumnNamesByLabelsMap( Reports.ReportExtendedMetadata metadata ) {
 
-        System.debug( 'getting id column names by labels map' );
+        System.debug( 'getting column names by labels map' );
         System.debug( metadata );
 
         Map<String, Reports.DetailColumn> reportColumns = metadata.getDetailColumnInfo();
@@ -96,12 +91,10 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
         Map<String, String> columnLabelsToNamesMap = new Map<String, String>();
 
         for ( Reports.DetailColumn column : reportColumns.values() ) {
-            if ( Reports.ColumnDataType.ID_DATA == column.getDataType() ) {
-                columnLabelsToNamesMap.put(
-                    column.getLabel(),
-                    column.getName()
-                );
-            }
+            columnLabelsToNamesMap.put(
+                column.getLabel(),
+                column.getName()
+            );
         }
 
         System.debug( columnLabelsToNamesMap );
