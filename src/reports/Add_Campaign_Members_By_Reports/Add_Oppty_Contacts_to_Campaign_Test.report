@@ -16,10 +16,6 @@
     <format>Tabular</format>
     <name>Add Oppty Contacts to Campaign Test</name>
     <params>
-        <name>terr</name>
-        <value>all</value>
-    </params>
-    <params>
         <name>include</name>
         <value>all</value>
     </params>
