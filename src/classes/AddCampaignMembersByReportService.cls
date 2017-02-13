@@ -11,7 +11,10 @@ public with sharing class AddCampaignMembersByReportService {
      */
     public List<CampaignMember> addMembersToCampaign( List<ID> leadOrContactIds, ID campaignId, String campaignMemberStatus ) {
 
-        System.debug( 'adding members to campaign: campaignId=' + campaignId + ', campaignMemberStatus=' + campaignMemberStatus + ', leadOrContactIds=' + leadOrContactIds );
+        // dedupe list of record ids just in case a report with duplicate ids was used
+        Set<ID> uniqueLeadOrContactIds = new Set<ID>( leadOrContactIds );
+
+        System.debug( 'adding members to campaign: campaignId=' + campaignId + ', campaignMemberStatus=' + campaignMemberStatus + ', leadOrContactIds=' + uniqueLeadOrContactIds );
 
         List<CampaignMember> existingMembers = new List<CampaignMember>([
             SELECT
@@ -21,7 +24,7 @@ public with sharing class AddCampaignMembersByReportService {
             WHERE
                 campaignId = :campaignId
                 AND
-                leadOrContactId IN :leadOrContactIds
+                leadOrContactId IN :uniqueLeadOrContactIds
         ]);
 
         Set<ID> existingContactOrLeadIds = new Set<ID>();
@@ -32,7 +35,7 @@ public with sharing class AddCampaignMembersByReportService {
 
         List<CampaignMember> membersToInsert = new List<CampaignMember>();
 
-        for ( ID leadOrContactId : leadOrContactIds ) {
+        for ( ID leadOrContactId : uniqueLeadOrContactIds ) {
 
             Boolean isContactId = ( leadOrContactId.getSObjectType() == Contact.sObjectType );
             Boolean isLeadId    = ( leadOrContactId.getSObjectType() == Lead.sObjectType );
