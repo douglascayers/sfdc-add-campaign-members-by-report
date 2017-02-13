@@ -62,28 +62,18 @@ private class AddCampaignMembersByReportActionTest {
 
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
 
-        AddCampaignMembersByReportSetting__c setting = settingsMap.get( reportId );
+        // delete existing settings
+        delete settingsMap.values();
 
-        if ( setting == null ) {
+        // create one new setting for testing
+        AddCampaignMembersByReportSetting__c setting = new AddCampaignMembersByReportSetting__c(
+            setupOwnerId = UserInfo.getOrganizationId(),
+            name = reportId,
+            campaign_id__c = campaignId,
+            report_contact_or_lead_id_column_label__c = 'Contact_ID'
+        );
 
-            setting = new AddCampaignMembersByReportSetting__c(
-                setupOwnerId = UserInfo.getOrganizationId(),
-                name = reportId,
-                campaign_id__c = campaignId,
-                report_contact_or_lead_id_column_label__c = 'Contact ID'
-            );
-
-            insert setting;
-
-        } else {
-
-            setting.campaign_id__c = campaignId;
-            setting.report_contact_or_lead_id_column_label__c = 'Contact ID';
-            setting.campaign_member_added_status__c = null;
-
-            update setting;
-
-        }
+        insert setting;
 
         // Ideas how to create report notification action test from Andy Fawcett and Dominick Medley
         // http://andyinthecloud.com/2015/11/07/supercharging-salesforce-report-subscriptions-with-apex-and-flow/

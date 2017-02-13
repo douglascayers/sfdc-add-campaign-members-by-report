@@ -12,9 +12,9 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
     // by making multiple invocations, this gets around the 2,000 record limit in Analytics API.
     // To do this it sorts the report by a column, ideally with unique values, and applies a filter
     // to get the next round of records greater than the last value seen in the previous iteration.
-    // These variables are the column label and name in the report to use for this sorting purpose.
+    // This is the column name in the report to use for this sorting purpose.
+    // Note, this is not the Column Label which may change based on running user's language/locale settings.
     // And for our adding campaign members purpose, should be a Contact ID or Lead ID column.
-    private String columnLabel;
     private String columnName;
 
     // ----------------------------------------------------
@@ -30,25 +30,24 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
             throw new AddCampaignMembersByReportException( 'Missing custom setting AddCampaignMembersByReportSetting__c record with name "' + reportId + '"' );
         }
 
-        Reports.ReportExtendedMetadata metadata = Reports.ReportManager.describeReport( reportId ).getReportExtendedMetadata();
-        Map<String, String> columnLabelsToNamesMap = getColumnNamesByLabelsMap( metadata );
-        String columnName = columnLabelsToNamesMap.get( setting.report_contact_or_lead_id_column_label__c );
-
-        if ( String.isBlank( columnName ) ) {
-            throw new AddCampaignMembersByReportException( 'Report with id "' + reportId + '" is missing expected column label "' + setting.report_contact_or_lead_id_column_label__c + '" that references a record id like Contact.Id or Lead.Id' );
-        }
-
         this.reportId = reportId;
         this.campaignId = setting.campaign_id__c;
         this.campaignMemberStatus = setting.campaign_member_added_status__c;
-        this.columnLabel = setting.report_contact_or_lead_id_column_label__c;
-        this.columnName = columnName;
+        this.columnName = setting.report_contact_or_lead_id_column_label__c.toUpperCase();
 
         System.debug( 'reportId=' + this.reportId );
         System.debug( 'campaignId=' + this.campaignId );
         System.debug( 'campaignMemberStatus=' + this.campaignMemberStatus );
-        System.debug( 'columnLabel=' + this.columnLabel );
         System.debug( 'columnName=' + this.columnName );
+
+        Reports.ReportExtendedMetadata metadata = Reports.ReportManager.describeReport( reportId ).getReportExtendedMetadata();
+        Map<String, Reports.DetailColumn> reportColumnsMap = metadata.getDetailColumnInfo();
+
+        System.debug( 'reportColumnsMap: ' + reportColumnsMap );
+
+        if ( !reportColumnsMap.containsKey( columnName ) ) {
+            throw new AddCampaignMembersByReportException( 'Report with id "' + reportId + '" is missing expected column "' + setting.report_contact_or_lead_id_column_label__c + '" that references a record id like Contact.Id or Lead.Id' );
+        }
 
     }
 
@@ -78,29 +77,6 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
     }
 
     // ----------------------------------------------------
-
-    private Map<String, String> getColumnNamesByLabelsMap( Reports.ReportExtendedMetadata metadata ) {
-
-        System.debug( 'getting column names by labels map' );
-        System.debug( metadata );
-
-        Map<String, Reports.DetailColumn> reportColumns = metadata.getDetailColumnInfo();
-
-        System.debug( reportColumns );
-
-        Map<String, String> columnLabelsToNamesMap = new Map<String, String>();
-
-        for ( Reports.DetailColumn column : reportColumns.values() ) {
-            columnLabelsToNamesMap.put(
-                column.getLabel(),
-                column.getName()
-            );
-        }
-
-        System.debug( columnLabelsToNamesMap );
-
-        return columnLabelsToNamesMap;
-    }
 
     public class AddCampaignMembersByReportException extends Exception {}
 
