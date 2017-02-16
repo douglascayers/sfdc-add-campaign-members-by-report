@@ -1,0 +1,70 @@
+<apex:page tabStyle="Add_Campaign_Members_By_Report_Settings__tab" controller="CampaignReportSettingsListController" readOnly="true">
+
+    <apex:sectionHeader title="Add Campaign Members by Report Settings"/>
+
+    <apex:outputPanel id="mainPanel">
+
+        <apex:pageMessages id="theMessages"/>
+
+        <apex:form >
+
+            <apex:pageBlock >
+
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton value=" New " action="/apex/CampaignReportSettingsEditPage?retURL=%2Fapex%2FCampaignReportSettingsListPage"/>
+                </apex:pageBlockButtons>
+
+                <apex:pageBlockTable var="wrapper" value="{!settingWrappers}">
+
+                    <apex:column headerValue="Actions" styleClass="actionColumn">
+
+                        <apex:outputLink value="/apex/CampaignReportSettingsEditPage?id={!wrapper.setting.id}&retURL=/apex/CampaignReportSettingsListPage"
+                                         styleClass="actionLink"
+                                         title="Edit - Record - {!wrapper.report.id}">Edit</apex:outputLink>
+
+                        |&nbsp;
+
+                        <apex:outputLink value="{!URLFOR( $Action.AddCampaignMembersByReportSetting__c.Delete, wrapper.setting.id, [
+                                                    retURL = '/apex/CampaignReportSettingsListPage'
+                                                ])}"
+                                         styleClass="actionLink"
+                                         title="Delete - Record - {!wrapper.report.id}"
+                                         onclick="return confirm('Are you sure?');">Del</apex:outputLink>
+
+                    </apex:column>
+
+                    <apex:column headerValue="Report">
+                        <apex:outputLink value="/{!wrapper.report.id}" target="_blank" rendered="{!NOT(ISBLANK(wrapper.report.id))}">
+                            <apex:outputText value="{!wrapper.report.name}"/>
+                        </apex:outputLink>
+                        <apex:outputText value="{!wrapper.setting.name}" rendered="{!ISBLANK(wrapper.report.id)}"/>
+                    </apex:column>
+
+                    <apex:column headerValue="Campaign">
+                        <apex:outputLink value="/{!wrapper.campaign.id}" target="_blank" rendered="{!NOT(ISBLANK(wrapper.campaign.id))}">
+                            <apex:outputText value="{!wrapper.campaign.name}"/>
+                        </apex:outputLink>
+                        <apex:outputText value="{!wrapper.setting.Campaign_ID__c}" rendered="{!ISBLANK(wrapper.campaign.id)}"/>
+                    </apex:column>
+
+                    <apex:column headerValue="Campaign Member Added Status">
+                        <apex:outputText value="{!wrapper.setting.Campaign_Member_Added_Status__c}"/>
+                    </apex:column>
+
+                    <apex:column headerValue="Report Contact or Lead ID Column Label">
+                        <apex:outputText value="{!wrapper.setting.Report_Contact_or_Lead_ID_Column_Label__c}"/>
+                    </apex:column>
+
+                    <apex:column headerValue="Report Contact or Lead ID Column Name">
+                        <apex:outputText value="{!wrapper.setting.Report_Contact_or_Lead_ID_Column_Name__c}"/>
+                    </apex:column>
+
+                </apex:pageBlockTable>
+
+            </apex:pageBlock>
+
+        </apex:form>
+
+    </apex:outputPanel>
+
+</apex:page>

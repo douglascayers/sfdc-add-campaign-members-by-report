@@ -1,0 +1,142 @@
+<apex:page tabStyle="Add_Campaign_Members_By_Report_Settings__tab" standardController="AddCampaignMembersByReportSetting__c" extensions="CampaignReportSettingsEditController">
+
+    <apex:sectionHeader title="Manage Add Campaign Members By Report Settings"/>
+
+    <apex:outputPanel id="mainPanel">
+
+        <apex:pageMessages id="theMessages"/>
+
+        <apex:form >
+
+            <apex:pageBlock >
+
+                <apex:pageBlockButtons >
+                    <apex:commandButton value=" Save " action="{!save}"/>
+                    <apex:commandButton value=" Cancel " action="{!cancel}"/>
+                </apex:pageBlockButtons>
+
+                <apex:pageBlockSection columns="1" collapsible="false">
+
+                    <!-- Choose Campaign -->
+
+                    <apex:pageBlockSectionItem helpText="The Campaign to add the Contacts or Leads from the report to.">
+
+                        <apex:outputLabel value="Campaign" for="selectCampaignInput"/>
+
+                        <apex:outputPanel >
+
+                            <apex:inputField id="selectCampaignInput" value="{!member.campaignId}" required="false">
+                                <apex:actionSupport event="onchange" status="selectCampaignStatus" rerender="mainPanel"/>
+                            </apex:inputField>
+
+                            <apex:actionStatus id="selectCampaignStatus">
+                                <apex:facet name="start">
+                                    <img src="/img/loading.gif" width="16px" height="16px" style="margin-left: 5px;"/>
+                                </apex:facet>
+                            </apex:actionStatus>
+
+                        </apex:outputPanel>
+
+                    </apex:pageBlockSectionItem>
+
+                    <!-- Choose Member Status -->
+
+                    <apex:pageBlockSectionItem helpText="The Campaign Member Status to use when adding new members to Campaign.">
+
+                        <apex:outputLabel value="Default Member Added Status" for="selectMemberStatusInput"/>
+
+                        <apex:outputPanel >
+
+                            <apex:selectList id="selectMemberStatusInput" value="{!member.status}" size="1" multiselect="false" required="false">
+                                <apex:selectOptions value="{!memberStatusOptions}"/>
+                                <apex:actionSupport event="onchange" status="selectMemberStatusStatus" rerender="mainPanel"/>
+                            </apex:selectList>
+
+                            <apex:actionStatus id="selectMemberStatusStatus">
+                                <apex:facet name="start">
+                                    <img src="/img/loading.gif" width="16px" height="16px" style="margin-left: 5px;"/>
+                                </apex:facet>
+                            </apex:actionStatus>
+
+                        </apex:outputPanel>
+
+                    </apex:pageBlockSectionItem>
+
+                    <!-- Choose Folder -->
+
+                    <apex:pageBlockSectionItem helpText="Choose the Report Folder that contains your report of Contacts or Leads.">
+
+                        <apex:outputLabel value="Report Folder" for="selectFolderInput"/>
+
+                        <apex:outputPanel >
+
+                            <apex:selectList id="selectFolderInput" value="{!selectedFolderId}" size="1" multiselect="false" required="false">
+                                <apex:selectOptions value="{!folderOptions}"/>
+                                <apex:actionSupport event="onchange" status="selectFolderStatus" rerender="mainPanel"/>
+                            </apex:selectList>
+
+                            <apex:actionStatus id="selectFolderStatus">
+                                <apex:facet name="start">
+                                    <img src="/img/loading.gif" width="16px" height="16px" style="margin-left: 5px;"/>
+                                </apex:facet>
+                            </apex:actionStatus>
+
+                        </apex:outputPanel>
+
+                    </apex:pageBlockSectionItem>
+
+                    <!-- Choose Report -->
+
+                    <apex:pageBlockSectionItem helpText="Choose the Report that contains Contacts or Leads to add as members to the Campaign.">
+
+                        <apex:outputLabel value="Report Name" for="selectReportInput"/>
+
+                        <apex:outputPanel >
+
+                            <apex:selectList id="selectReportInput" value="{!selectedReportId}" size="1" multiselect="false" required="false">
+                                <apex:selectOptions value="{!reportOptions}"/>
+                                <apex:actionSupport event="onchange" status="selectReportStatus" rerender="mainPanel"/>
+                            </apex:selectList>
+
+                            <apex:actionStatus id="selectReportStatus">
+                                <apex:facet name="start">
+                                    <img src="/img/loading.gif" width="16px" height="16px" style="margin-left: 5px;"/>
+                                </apex:facet>
+                            </apex:actionStatus>
+
+                        </apex:outputPanel>
+
+                    </apex:pageBlockSectionItem>
+
+                    <!-- Choose Report Column -->
+
+                    <apex:pageBlockSectionItem helpText="Choose the Report Column that contains the Contact ID or Lead ID of the records to add as members to the Campaign.">
+
+                        <apex:outputLabel value="Report Column" for="selectReportColumnInput"/>
+
+                        <apex:outputPanel >
+
+                            <apex:selectList id="selectReportColumnInput" value="{!selectedReportColumnName}" size="1" multiselect="false" required="false">
+                                <apex:selectOptions value="{!reportColumnOptions}"/>
+                                <apex:actionSupport event="onchange" status="selectReportColumnStatus" rerender="mainPanel"/>
+                            </apex:selectList>
+
+                            <apex:actionStatus id="selectReportColumnStatus">
+                                <apex:facet name="start">
+                                    <img src="/img/loading.gif" width="16px" height="16px" style="margin-left: 5px;"/>
+                                </apex:facet>
+                            </apex:actionStatus>
+
+                        </apex:outputPanel>
+
+                    </apex:pageBlockSectionItem>
+
+                </apex:pageBlockSection>
+
+            </apex:pageBlock>
+
+        </apex:form>
+
+    </apex:outputPanel>
+
+</apex:page>

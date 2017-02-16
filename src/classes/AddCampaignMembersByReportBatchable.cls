@@ -33,7 +33,7 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
         this.reportId = reportId;
         this.campaignId = setting.campaign_id__c;
         this.campaignMemberStatus = setting.campaign_member_added_status__c;
-        this.columnName = setting.report_contact_or_lead_id_column_label__c.toUpperCase();
+        this.columnName = setting.report_contact_or_lead_id_column_name__c.toUpperCase();
 
         System.debug( 'reportId=' + this.reportId );
         System.debug( 'campaignId=' + this.campaignId );

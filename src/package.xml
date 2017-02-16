@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>AddCampaignMembersByReportAction</members>
-        <members>AddCampaignMembersByReportActionTest</members>
-        <members>AddCampaignMembersByReportBatchable</members>
-        <members>AddCampaignMembersByReportBatchableTest</members>
-        <members>AddCampaignMembersByReportSchedulable</members>
-        <members>AddCampaignMembersByReportScheduleTest</members>
-        <members>AddCampaignMembersByReportService</members>
-        <members>AddCampaignMembersByReportServiceTest</members>
-        <members>NPSP_ReportService</members>
-        <members>NPSP_ReportServiceTest</members>
+        <members>*</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexPage</name>
     </types>
     <types>
         <members>AddCampaignMembersByReportSetting__c</members>
         <name>CustomObject</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>PermissionSet</name>
     </types>
     <types>
         <members>Add_Campaign_Members_By_Reports</members>

@@ -39,6 +39,18 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
+    <fields>
+        <fullName>Report_Contact_or_Lead_ID_Column_Name__c</fullName>
+        <description>The unique column name on the report that holds the contact or lead record id to add to the campaign. The report should only include at most one column with this name heading and the value must be the record id (not a text or formula field). Example, if the column label is &quot;Contact ID&quot; the unique name is likely &quot;CONTACT_ID&quot; and that report field must either pull from the Contact ID field (Contact.Id) or a lookup field to Contact object like OpportunityContactRole.ContactId. Same applies for Lead ID report columns.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The column name on the report that holds the contact or lead record id to add to the campaign. The report should only include at most one column with this name heading and the value must be the record id or lookup field (not a text or formula field).</inlineHelpText>
+        <label>Report Contact or Lead ID Column Name</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Add Campaign Members by Report Setting</label>
     <visibility>Public</visibility>
 </CustomObject>

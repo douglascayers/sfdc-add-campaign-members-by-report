@@ -70,7 +70,8 @@ private class AddCampaignMembersByReportActionTest {
             setupOwnerId = UserInfo.getOrganizationId(),
             name = reportId,
             campaign_id__c = campaignId,
-            report_contact_or_lead_id_column_label__c = 'Contact_ID'
+            report_contact_or_lead_id_column_label__c = 'Contact ID',
+            report_contact_or_lead_id_column_name__c = 'Contact_ID'
         );
 
         insert setting;
