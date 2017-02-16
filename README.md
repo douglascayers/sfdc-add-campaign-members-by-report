@@ -20,33 +20,31 @@ Getting Started
 
 1) Deploy code using link above.
 
-2) Create a report in `Tabular` format that contains at least one **Contact ID** or **Lead ID** field. The field must be either the record ID or a lookup to the object holding the ID value, it cannot be a `text` or `formula` field. Please note, `Summary`, `Matrix` or other complex report formats are not supported by this package at this time.
+2) Assign yourself the permission set named **Add Campaign Members By Report Admin**. This grants you access to Visualforce pages developed to let you easily manage the custom setting (selecting campaign, selecting report, selecting column from report). Otherwise by doing it manually in **Setup | Develop | Custom Settings** requires you to know all the underlying record IDs and details about Report Metadata.
+
+3) Create a report in `Tabular` format that contains at least one **Contact ID** or **Lead ID** field. The field must be either the record ID or a lookup to the object holding the ID value, it cannot be a `text` or `formula` field. Please note, `Summary`, `Matrix` or other complex report formats are not supported by this package at this time.
 
 ![create report](images/contact-tabular-report1.png)
 
 ![create report](images/contact-tabular-report2.png)
 
-3) Create a Campaign that you want the contacts/leads from the report to be added to as members whenever the report runs.
+4) Create an active Campaign that you want the contacts/leads from the report to be added to as members whenever the report runs.
 
-4) Go to **Setup | Develop | Custom Settings** and click `Manage` link next to **Add Campaign Members by Report Setting**.
+5) Navigate to the tab **Add Campaign Members By Report Settings**. This will list any existing custom settings, which you may edit or delete as needed. Click the **New** button to create a new configuration for our report (step 3) and campaign (step 4).
 
-![manage setting](images/manage-custom-setting1.png)
+![create report](images/manage-custom-setting1.png)
 
-5) Click `New` button to create a new setting.
+![create report](images/manage-custom-setting2.png)
 
-* Enter the **15 character** record ids for the **source report** and **target campaign**.
-* Specify the column label in the report that holds the Contact or Lead record ID to add to the campaign.
-* Optionally, specify the default campaign member status to use when new members are added. If left blank then Salesforce will use the default configured on the Campaign itself.
+![create report](images/manage-custom-setting3.gif)
 
-![manage setting](images/manage-custom-setting2.png)
-
-6) Go back and run your report from step 2. On the report results page, click on the `Subscribe` button. It should appear just after the `Add to Campaign` button. Ironically enough, this solution has nothing to do with the `Add to Campaign` button -- though you're welcome to use that button to manually add contacts to your campaigns. But if you're still interested in automating the process, keep reading because you're almost done!
+6) Go back and run your report from step 3. On the report results page, click on the `Subscribe` button. It should appear just after the `Add to Campaign` button. Ironically enough, this solution has nothing to do with the `Add to Campaign` button -- though you're welcome to use that button to manually add contacts to your campaigns. But if you're still interested in automating the process, keep reading because you're almost done!
 
 ![subscribe report](/images/subscribe-to-report1.png)
 
 ![subscribe report](/images/subscribe-to-report2.png)
 
-7) To test the subscription, click the **Save & Run Now** button. If successful then your campaign should now include all the contacts/leads from the report.
+7) To test the subscription, click the **Save & Run Now** button. If successful then your campaign should now include all the contacts/leads from the report. If you've maxed out your number of report subscriptions, see the FAQ below for how to schedule the report with Apex instead.
 
 * Note, it may take a moment depending on how many records are in your report.
 * For small reports (less than 200 records) it may complete in a couple seconds.
@@ -60,7 +58,7 @@ FAQ
 Do I need to install the Non-Profit Starter Pack?
 -------------------------------------------------
 
-No, this package uses a copy of the [SalesforceFoundation](https://github.com/SalesforceFoundation) [ReportService](https://github.com/SalesforceFoundation/CampaignTools/blob/master/src/classes/ReportService.cls) as part of their [CampaignTools](https://github.com/SalesforceFoundation/CampaignTools) package to support all records in a report beyond the 2,000 limit. I have included the two apex classes needed in this package.
+No, this package uses a copy of the [SalesforceFoundation](https://github.com/SalesforceFoundation) [ReportService](https://github.com/SalesforceFoundation/CampaignTools/blob/master/src/classes/ReportService.cls) as part of their [CampaignTools](https://github.com/SalesforceFoundation/CampaignTools) package to support all records in a report beyond the 2,000 limit. I have included the two apex classes needed in this package. Just let the Salesforce Foundation know we appreciate them!
 
 
 Can I use other report types other than the standard "Contacts & Accounts" or "Leads"?
