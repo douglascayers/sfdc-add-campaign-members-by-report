@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Populated by install post-script to know what namespace prefix to use by our code when deployed in subscriber org. http://salesforce.stackexchange.com/questions/28974/determining-namespace-prefix-in-javascript-and-apex</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>BarPrefix__c</fullName>
+        <description>The namespace with double underscore suffix &apos;ns__&apos;</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The namespace with double underscore suffix &apos;ns__&apos;</inlineHelpText>
+        <label>Bar Prefix</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DotPrefix__c</fullName>
+        <description>The namespace with dot suffix &apos;ns.&apos;</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The namespace with dot suffix &apos;ns.&apos;</inlineHelpText>
+        <label>Dot Prefix</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RawPrefix__c</fullName>
+        <description>Just the namespace &apos;ns&apos;</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Just the namespace &apos;ns&apos;</inlineHelpText>
+        <label>Raw Prefix</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Namespace Settings</label>
+    <visibility>Protected</visibility>
+</CustomObject>
