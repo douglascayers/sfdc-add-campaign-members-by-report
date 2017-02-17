@@ -2,7 +2,7 @@
  * Developed by Doug Ayers (douglascayers.com)
  * https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report
  */
-public with sharing class PostInstallHandler implements InstallHandler {
+public with sharing class AddCampaignMembersInstallHandler implements InstallHandler {
 
     public void onInstall( InstallContext context ) {
 
@@ -10,7 +10,7 @@ public with sharing class PostInstallHandler implements InstallHandler {
 
         NamespaceSettings__c setting = NamespaceSettings__c.getOrgDefaults();
 
-        String prefix = PostInstallHandler.class.getName().substringBefore( 'PostInstallHandler' ).substringBefore( '.' );
+        String prefix = AddCampaignMembersInstallHandler.class.getName().substringBefore( 'AddCampaignMembersInstallHandler' ).substringBefore( '.' );
 
         if ( String.isNotBlank( prefix ) ) {
             setting.rawPrefix__c = prefix;
