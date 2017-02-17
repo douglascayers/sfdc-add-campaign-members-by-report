@@ -87,7 +87,10 @@ public with sharing class CampaignReportSettingsListController {
 
             SettingWrapper otherWrapper = (SettingWrapper) other;
 
-            return this.report.name.compareTo( otherWrapper.report.name );
+            String reportName = ( this.report != null ? this.report.name : this.setting.name );
+            String otherReportName = ( otherWrapper.report != null ? otherWrapper.report.name : otherWrapper.setting.name );
+
+            return ( reportName.compareTo( otherReportName ) );
         }
 
     }

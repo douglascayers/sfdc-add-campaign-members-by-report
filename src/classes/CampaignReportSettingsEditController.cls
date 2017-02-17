@@ -125,7 +125,7 @@ public with sharing class CampaignReportSettingsEditController {
 
                 upsert setting;
 
-                page = new PageReference( '/apex/CampaignReportSettingsListPage' );
+                page = new PageReference( '/apex/' + NamespaceUtils.getQualifiedPageName( 'CampaignReportSettingsListPage' ) );
                 page.getParameters().put( 'save_success', 'true' );
                 page.setRedirect( true );
 

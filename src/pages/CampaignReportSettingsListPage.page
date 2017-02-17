@@ -11,21 +11,21 @@
             <apex:pageBlock >
 
                 <apex:pageBlockButtons location="top">
-                    <apex:commandButton value=" New " action="/apex/CampaignReportSettingsEditPage?retURL=%2Fapex%2FCampaignReportSettingsListPage"/>
+                    <apex:commandButton value=" New " action="/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsEditPage?retURL=%2Fapex%2F{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsListPage"/>
                 </apex:pageBlockButtons>
 
                 <apex:pageBlockTable var="wrapper" value="{!settingWrappers}">
 
                     <apex:column headerValue="Actions" styleClass="actionColumn">
 
-                        <apex:outputLink value="/apex/CampaignReportSettingsEditPage?id={!wrapper.setting.id}&retURL=/apex/CampaignReportSettingsListPage"
+                        <apex:outputLink value="/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsEditPage?id={!wrapper.setting.id}&retURL=/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsListPage"
                                          styleClass="actionLink"
                                          title="Edit - Record - {!wrapper.report.id}">Edit</apex:outputLink>
 
                         |&nbsp;
 
                         <apex:outputLink value="{!URLFOR( $Action.AddCampaignMembersByReportSetting__c.Delete, wrapper.setting.id, [
-                                                    retURL = '/apex/CampaignReportSettingsListPage'
+                                                    retURL = '/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsListPage'
                                                 ])}"
                                          styleClass="actionLink"
                                          title="Delete - Record - {!wrapper.report.id}"
@@ -37,14 +37,14 @@
                         <apex:outputLink value="/{!wrapper.report.id}" target="_blank" rendered="{!NOT(ISBLANK(wrapper.report.id))}">
                             <apex:outputText value="{!wrapper.report.name}"/>
                         </apex:outputLink>
-                        <apex:outputText value="{!wrapper.setting.name}" rendered="{!ISBLANK(wrapper.report.id)}"/>
+                        <apex:outputText value="{!wrapper.setting.name}" rendered="{!ISBLANK(wrapper.report.id)}" title="No report found by ID {!wrapper.setting.name}"/>
                     </apex:column>
 
                     <apex:column headerValue="Campaign">
                         <apex:outputLink value="/{!wrapper.campaign.id}" target="_blank" rendered="{!NOT(ISBLANK(wrapper.campaign.id))}">
                             <apex:outputText value="{!wrapper.campaign.name}"/>
                         </apex:outputLink>
-                        <apex:outputText value="{!wrapper.setting.Campaign_ID__c}" rendered="{!ISBLANK(wrapper.campaign.id)}"/>
+                        <apex:outputText value="{!wrapper.setting.Campaign_ID__c}" rendered="{!ISBLANK(wrapper.campaign.id)}" title="No campaign found by ID {!wrapper.setting.Campaign_ID__c}"/>
                     </apex:column>
 
                     <apex:column headerValue="Campaign Member Added Status">

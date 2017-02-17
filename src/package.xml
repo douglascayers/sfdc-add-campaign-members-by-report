@@ -17,6 +17,8 @@
 		<members>NPSP_ReportServiceTest</members>
 		<members>AddCampaignMembersInstallHandler</members>
 		<members>AddCampaignMembersInstallHandlerTest</members>
+		<members>NamespaceUtils</members>
+		<members>NamespaceUtilsTest</members>
 		<name>ApexClass</name>
 	</types>
 	<types>
