@@ -12,7 +12,12 @@ Use reports to segment and filter the leads and contacts that matter to you then
 Installation
 ------------
 
-* [Deploy from Github](https://githubsfdeploy.herokuapp.com)
+Two options. You may install the unmanaged code from GitHub and make any desired adjustments. You are responsible for ensuring unit tests meet your org's validation rule and other requirements. You may also install this solution as a managed package. You can't customize the code but you don't have to worry about unit tests or code coverage!
+
+* [Deploy from Github](https://githubsfdeploy.herokuapp.com) (unmanaged)
+* Install Managed Package (Release 1.4)
+    * [Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t46000000E13M)
+    * [Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t46000000E13M)
 
 
 Getting Started
