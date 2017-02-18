@@ -83,7 +83,7 @@ public with sharing class CampaignReportSettingsEditController {
 
     public PageReference save() {
 
-        PageReference page = null;
+        PageReference returnPage = null;
 
         SavePoint sp = Database.setSavePoint();
 
@@ -125,9 +125,9 @@ public with sharing class CampaignReportSettingsEditController {
 
                 upsert setting;
 
-                page = new PageReference( '/apex/' + NamespaceUtils.getQualifiedPageName( 'CampaignReportSettingsListPage' ) );
-                page.getParameters().put( 'save_success', 'true' );
-                page.setRedirect( true );
+                returnPage = Page.CampaignReportSettingsListPage;
+                returnPage.getParameters().put( 'save_success', 'true' );
+                returnPage.setRedirect( true );
 
             }
 
@@ -139,7 +139,7 @@ public with sharing class CampaignReportSettingsEditController {
 
         }
 
-        return page;
+        return returnPage;
     }
 
     public List<SelectOption> getMemberStatusOptions() {

@@ -60,7 +60,8 @@ private class CampaignReportSettingsEditControllerTest {
 
         page = controller.save();
 
-        System.assert( page.getUrl().contains( 'CampaignReportSettingsListPage?save_success=true' ) );
+        System.debug( page );
+        System.assert( page.getUrl().containsIgnoreCase( 'CampaignReportSettingsListPage?save_success=true' ) );
 
         // -------------------------------------------
 

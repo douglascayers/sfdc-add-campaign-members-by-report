@@ -11,22 +11,26 @@
             <apex:pageBlock >
 
                 <apex:pageBlockButtons location="top">
-                    <apex:commandButton value=" New " action="/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsEditPage?retURL=%2Fapex%2F{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsListPage"/>
+                    <apex:commandButton value=" New " action="{!URLFOR($Page.CampaignReportSettingsEditPage, null, [ retURL = $Page.CampaignReportSettingsListPage ])}"/>
                 </apex:pageBlockButtons>
 
                 <apex:pageBlockTable var="wrapper" value="{!settingWrappers}">
 
                     <apex:column headerValue="Actions" styleClass="actionColumn">
 
-                        <apex:outputLink value="/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsEditPage?id={!wrapper.setting.id}&retURL=/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsListPage"
+                        <!--
+                            The 2nd param for URLFOR(), the record id, is ignored when linking to a visualforce page.
+                            Therefore I had to put it in the parameter map [ id = xxx ].
+                            Notice the difference between this config and the `delete` link below.
+                            Since the `delete` link is standard action the 2nd param was respected.
+                         -->
+                        <apex:outputLink value="{!URLFOR($Page.CampaignReportSettingsEditPage, null, [ id = wrapper.setting.id, retURL = $Page.CampaignReportSettingsListPage ])}"
                                          styleClass="actionLink"
                                          title="Edit - Record - {!wrapper.report.id}">Edit</apex:outputLink>
 
                         |&nbsp;
 
-                        <apex:outputLink value="{!URLFOR( $Action.AddCampaignMembersByReportSetting__c.Delete, wrapper.setting.id, [
-                                                    retURL = '/apex/{!$Setup.NamespaceSettings__c.barPrefix__c}CampaignReportSettingsListPage'
-                                                ])}"
+                        <apex:outputLink value="{!URLFOR($Action.AddCampaignMembersByReportSetting__c.Delete, wrapper.setting.id, [ retURL = $Page.CampaignReportSettingsListPage ])}"
                                          styleClass="actionLink"
                                          title="Delete - Record - {!wrapper.report.id}"
                                          onclick="return confirm('Are you sure?');">Del</apex:outputLink>

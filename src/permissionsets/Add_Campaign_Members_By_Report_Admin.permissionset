@@ -37,6 +37,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AddCampaignMembersInstallHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>AddCampaignMembersInstallHandlerTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CampaignReportSettingsEditController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -58,6 +66,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>NPSP_ReportServiceTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>NamespaceUtils</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>NamespaceUtilsTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <description>Grant user access to visualforce pages used for configuring the custom settings that match reports to campaigns. Part of solution by Doug Ayers (https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report)</description>
