@@ -22,13 +22,6 @@ private class CampaignReportSettingsEditControllerTest {
 
         insert camp;
 
-        CampaignMemberStatus status = new CampaignMemberStatus(
-            campaignId = camp.id,
-            label = 'Sent'
-        );
-
-        insert status;
-
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
 
         // delete existing settings

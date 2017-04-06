@@ -6,4 +6,5 @@
     <tab>Add_Campaign_Members_By_Report_Settings</tab>
     <tab>standard-Campaign</tab>
     <tab>standard-report</tab>
+    <tab>Add_Campaign_Members_by_Report_Log__c</tab>
 </CustomApplication>

@@ -5,6 +5,8 @@
         <members>AddCampaignMembersByReportActionTest</members>
         <members>AddCampaignMembersByReportBatchable</members>
         <members>AddCampaignMembersByReportBatchableTest</members>
+        <members>AddCampaignMembersByReportLogger</members>
+        <members>AddCampaignMembersByReportLoggerTest</members>
         <members>AddCampaignMembersByReportSchedulable</members>
         <members>AddCampaignMembersByReportScheduleTest</members>
         <members>AddCampaignMembersByReportService</members>
@@ -32,12 +34,18 @@
     </types>
     <types>
         <members>AddCampaignMembersByReportSetting__c</members>
+        <members>Add_Campaign_Members_by_Report_Log__c</members>
         <members>NamespaceSettings__c</members>
         <name>CustomObject</name>
     </types>
     <types>
         <members>Add_Campaign_Members_By_Report_Settings</members>
+        <members>Add_Campaign_Members_by_Report_Log__c</members>
         <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Add_Campaign_Members_by_Report_Log__c-Add Campaign Members by Report Log Layout</members>
+        <name>Layout</name>
     </types>
     <types>
         <members>Add_Campaign_Members_By_Report_Admin</members>
@@ -51,5 +59,5 @@
         <members>NPSP_Test_Reports/NPSP_Test_Account_Report</members>
         <name>Report</name>
     </types>
-    <version>38.0</version>
+    <version>39.0</version>
 </Package>

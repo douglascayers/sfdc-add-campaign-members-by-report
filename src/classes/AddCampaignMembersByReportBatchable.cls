@@ -4,8 +4,13 @@
  */
 public with sharing class AddCampaignMembersByReportBatchable implements Database.Batchable<ID>, Database.Stateful {
 
+    @TestVisible
     private ID reportId;
+
+    @TestVisible
     private ID campaignId;
+
+    @TestVisible
     private String campaignMemberStatus;
 
     // The report service paginates through all the records in the report
@@ -21,32 +26,40 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
 
     public AddCampaignMembersByReportBatchable( ID reportId ) {
 
-        System.debug( 'AddCampaignMembersByReportBatchable.init' );
+        try {
 
-        // to avoid having to check 15 and 18 character ids, the custom setting name is supposed to be the 15 character id for the report
-        AddCampaignMembersByReportSetting__c setting = AddCampaignMembersByReportSetting__c.getValues( String.valueOf( reportId ).left( 15 ) );
+            System.debug( 'AddCampaignMembersByReportBatchable.init' );
 
-        if ( setting == null ) {
-            throw new AddCampaignMembersByReportException( 'Missing custom setting AddCampaignMembersByReportSetting__c record with name "' + reportId + '"' );
-        }
+            // to avoid having to check 15 and 18 character ids, the custom setting name is supposed to be the 15 character id for the report
+            AddCampaignMembersByReportSetting__c setting = AddCampaignMembersByReportSetting__c.getValues( String.valueOf( reportId ).left( 15 ) );
 
-        this.reportId = reportId;
-        this.campaignId = setting.campaign_id__c;
-        this.campaignMemberStatus = setting.campaign_member_added_status__c;
-        this.columnName = setting.report_contact_or_lead_id_column_name__c.toUpperCase();
+            if ( setting == null ) {
+                throw new AddCampaignMembersByReportException( 'Missing custom setting AddCampaignMembersByReportSetting__c record with name "' + reportId + '"' );
+            }
 
-        System.debug( 'reportId=' + this.reportId );
-        System.debug( 'campaignId=' + this.campaignId );
-        System.debug( 'campaignMemberStatus=' + this.campaignMemberStatus );
-        System.debug( 'columnName=' + this.columnName );
+            this.reportId = reportId;
+            this.campaignId = setting.campaign_id__c;
+            this.campaignMemberStatus = setting.campaign_member_added_status__c;
+            this.columnName = setting.report_contact_or_lead_id_column_name__c.toUpperCase();
 
-        Reports.ReportExtendedMetadata metadata = Reports.ReportManager.describeReport( reportId ).getReportExtendedMetadata();
-        Map<String, Reports.DetailColumn> reportColumnsMap = metadata.getDetailColumnInfo();
+            System.debug( 'reportId=' + this.reportId );
+            System.debug( 'campaignId=' + this.campaignId );
+            System.debug( 'campaignMemberStatus=' + this.campaignMemberStatus );
+            System.debug( 'columnName=' + this.columnName );
 
-        System.debug( 'reportColumnsMap: ' + reportColumnsMap );
+            Reports.ReportExtendedMetadata metadata = Reports.ReportManager.describeReport( reportId ).getReportExtendedMetadata();
+            Map<String, Reports.DetailColumn> reportColumnsMap = metadata.getDetailColumnInfo();
 
-        if ( !reportColumnsMap.containsKey( columnName ) ) {
-            throw new AddCampaignMembersByReportException( 'Report with id "' + reportId + '" is missing expected column "' + setting.report_contact_or_lead_id_column_label__c + '" that references a record id like Contact.Id or Lead.Id' );
+            System.debug( 'reportColumnsMap: ' + reportColumnsMap );
+
+            if ( !reportColumnsMap.containsKey( columnName ) ) {
+                throw new AddCampaignMembersByReportException( 'Report with id "' + reportId + '" is missing expected column "' + setting.report_contact_or_lead_id_column_label__c + '" that references a record id like Contact.Id or Lead.Id' );
+            }
+
+        } catch ( Exception e ) {
+
+            AddCampaignMembersByReportLogger.log( e );
+
         }
 
     }
@@ -55,18 +68,41 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
 
     public Iterable<ID> start( Database.BatchableContext context ) {
 
-        System.debug( 'AddCampaignMembersByReportBatchable.start: ' + context );
+        try {
 
-        Iterable<Id> reportRowIdIterable = new NPSP_ReportService.ReportRowIdIterableIterator( this.reportId, this.columnName );
+            System.debug( 'AddCampaignMembersByReportBatchable.start: ' + context );
 
-        return (Iterable<ID>) reportRowIdIterable;
+            Iterable<Id> reportRowIdIterable = new NPSP_ReportService.ReportRowIdIterableIterator( this.reportId, this.columnName );
+
+            return (Iterable<ID>) reportRowIdIterable;
+
+        } catch ( Exception e ) {
+
+            AddCampaignMembersByReportLogger.log( context.getJobId(), e );
+
+            return new EmptyIterator();
+
+        }
+
     }
 
     public void execute( Database.BatchableContext context, List<ID> recordIds ) {
 
-        System.debug( 'AddCampaignMembersByReportBatchable.execute: ' + context );
+        SavePoint sp = Database.setSavePoint();
 
-        new AddCampaignMembersByReportService().addMembersToCampaign( recordIds, this.campaignId, this.campaignMemberStatus );
+        try {
+
+            System.debug( 'AddCampaignMembersByReportBatchable.execute: ' + context );
+
+            new AddCampaignMembersByReportService().addMembersToCampaign( recordIds, this.campaignId, this.campaignMemberStatus );
+
+        } catch ( Exception e ) {
+
+            Database.rollback( sp );
+
+            AddCampaignMembersByReportLogger.log( context.getJobId(), e );
+
+        }
 
     }
 
@@ -74,10 +110,29 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
 
         System.debug( 'AddCampaignMembersByReportBatchable.finish: ' + context );
 
+        AddCampaignMembersByReportLogger.sendApexExceptionEmailIfAnyErrorsSince( context.getJobId() );
+
     }
 
     // ----------------------------------------------------
 
     public class AddCampaignMembersByReportException extends Exception {}
+
+    @TestVisible
+    private class EmptyIterator implements Iterator<ID>, Iterable<ID> {
+
+        public Boolean hasNext() {
+            return false;
+        }
+
+        public ID next() {
+            return null;
+        }
+
+        public Iterator<ID> iterator() {
+            return new EmptyIterator();
+        }
+
+    }
 
 }
