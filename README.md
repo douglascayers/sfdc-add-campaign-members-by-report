@@ -54,7 +54,7 @@ You may install the unmanaged code from GitHub and make any desired adjustments.
 Getting Started
 ---------------
 
-1) Deploy code using link above.
+1) Install latest package release from links above.
 
 2) Assign yourself the permission set named **Add Campaign Members By Report Admin**. This grants you access to Visualforce pages developed to let you easily manage the custom setting (selecting campaign, selecting report, selecting column from report). Otherwise by doing it manually in **Setup | Develop | Custom Settings** requires you to know all the underlying record IDs and details about Report Metadata.
 
