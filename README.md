@@ -9,15 +9,41 @@ Save time and effort and avoid data loads by automatically adding contacts and l
 Use reports to segment and filter the leads and contacts that matter to you then use either Report Subscriptions or Scheduled Jobs to automate adding those records to your campaigns. You can even specify the default campaign member status to use when adding the members.
 
 
-Installation
-------------
+Packaged Release History
+------------------------
 
-Two options. You may install the unmanaged code from GitHub and make any desired adjustments. You are responsible for ensuring unit tests meet your org's validation rule and other requirements. You may also install this solution as a managed package. You can't customize the code but you don't have to worry about unit tests or code coverage!
+Release 1.6
+-----------
+* Install package
+  * [Production URL](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t46000000GzR5)
+  * [Sandbox URL](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t46000000GzR5)
 
-* [Deploy from Github](https://githubsfdeploy.herokuapp.com) (unmanaged)
-* Install Managed Package (Release 1.5)
-    * [Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t46000000E17Z)
-    * [Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t46000000E17Z)
+* Fixed bug with custom report types, there was a case-sensitivity issue with column names.
+* Introduces "Add Campaign Members by Report Log" tab so you can see some information when errors occur. Managed packages hide Debug Log details so it was nearly impossible for me to help troubleshoot. Now you'll at least have some high level information that may help you solve the issue and/or help me know where to dig in further.
+
+![screen shot](images/error-logs1.png)
+
+Release 1.5
+-----------
+* Project now available as a managed package! No more messing with unit tests during deployment!
+* Introduces "Add Campaign Members by Report Settings" tab to easily configure which reports feed into which campaigns.
+* Supports reports where the Contact and/or Lead ID exists in the report multiple times. Recommend ensuring reports don't include duplicate ids for overall performance, but now duplicates won't cause the app to fail to add members to your campaigns.
+* Multi-lingual support for report column names. The label of a column name changes based on running user's language preference so now the code references the unique API column name instead.
+
+Earlier Releases
+----------------
+* General development
+* Support reports with more than 2,000 records
+* Support specifying the default campaign member status to use when adding new members
+* Introduces schedulable class that developers can use if you exceed your limit of Report Subscriptions
+
+
+Installing the Source Code (Developers)
+---------------------------------------
+
+You may install the unmanaged code from GitHub and make any desired adjustments. You are responsible for ensuring unit tests meet your org's validation rules and other requirements.
+
+* [Deploy from Github](https://githubsfdeploy.herokuapp.com)
 
 
 Getting Started
