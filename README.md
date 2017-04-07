@@ -20,8 +20,12 @@ Release 1.6
 
 * Fixed bug with custom report types, there was a case-sensitivity issue with column names.
 * Introduces "Add Campaign Members by Report Log" tab so you can see some information when errors occur. Managed packages hide Debug Log details so it was nearly impossible for me to help troubleshoot. Now you'll at least have some high level information that may help you solve the issue and/or help me know where to dig in further.
+* If error log records are generated then email is sent to all Salesforce Users listed in `Setup | Email Administration | Apex Exception Email` notifying them to review the error log records.
 
 ![screen shot](images/error-logs1.png)
+
+![screen shot](images/error-logs2.png)
+
 
 Release 1.5
 -----------
@@ -114,3 +118,10 @@ Alternatively, you can [schedule a job](https://developer.salesforce.com/docs/at
 Please consider voting for these ideas to increase the report subscription limit:
 * [Increase the limit on the number of reports a user can subscribe to](https://success.salesforce.com/ideaView?id=08730000000DkodAAC)
 * [Increase Report Subscription Notifications](https://success.salesforce.com/ideaView?id=08730000000wk37AAA)
+
+
+There was an unexpected error while running an action for 'Some Report Name'
+--------------------------------------------------------------------------------
+
+Salesforce automatically sends this email whenever a Report Subscription action encounters an error.
+The email does not contain any helpful information, but if you get this email then do check the **Add Campaign Members by Report Logs** tab for any error messages.
