@@ -131,5 +131,5 @@ The email does not contain any helpful information, but if you get this email th
 Error: Missing custom setting AddCampaignMembersByReportSetting__c record with name "00OB0000000UKz0MAG"
 --------------------------------------------------------------------------------------------------------
 
-You need to use the "Add Campaign Member by Report Settings" tab and create a setting that maps your report to the campaign it will add members to.
+You need to use the **Add Campaign Member by Report Settings** tab and create a setting that maps your report to the campaign it will add members to.
 The alphanumeric value at end of the error message is the ID of the report that needs to be configured.
