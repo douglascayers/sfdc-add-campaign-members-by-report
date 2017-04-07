@@ -7,14 +7,6 @@
         <field>FIRST_NAME</field>
     </columns>
     <description>Test report. https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report</description>
-    <filter>
-        <criteriaItems>
-            <column>FIRST_NAME</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>startsWith</operator>
-            <value>R</value>
-        </criteriaItems>
-    </filter>
     <format>Tabular</format>
     <name>Add Contacts To Campaign Test</name>
     <params>
@@ -26,6 +18,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <interval>INTERVAL_TODAY</interval>
     </timeFrameFilter>
 </Report>
