@@ -60,9 +60,8 @@ private class AddCampaignMembersByReportBatchableTest {
         String reportId = String.valueOf( reportList[0].id ).left( 15 );
         String campaignId = String.valueOf( camp.id ).left( 15 );
 
+        // since running with see all data then we must wipe out potential data
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
-
-        // delete existing settings
         delete settingsMap.values();
 
         // create one new setting for testing
@@ -71,10 +70,13 @@ private class AddCampaignMembersByReportBatchableTest {
             name = reportId,
             campaign_id__c = campaignId,
             report_contact_or_lead_id_column_label__c = 'Contact ID',
-            report_contact_or_lead_id_column_name__c = 'Contact_ID'
+            report_contact_or_lead_id_column_name__c = 'CONTACT_ID'
         );
 
         insert setting;
+
+        // since running with see all data then we must wipe out potential data
+        delete [ SELECT id FROM Add_Campaign_Members_by_Report_Log__c ];
 
         List<ID> leadOrContactIds = new List<ID>{ cont.id, ld.id };
 
@@ -89,7 +91,7 @@ private class AddCampaignMembersByReportBatchableTest {
         List<Add_Campaign_Members_by_Report_Log__c> logs = [ SELECT id, summary__c, detail__c FROM Add_Campaign_Members_by_Report_Log__c ];
         System.debug( LoggingLevel.ERROR, logs );
 
-        System.assertEquals( 0, logs.size() );
+        System.assertEquals( 0, logs.size(), 'should have no error logs' );
         System.assertEquals( 2, [ SELECT count() FROM CampaignMember WHERE campaignId = :camp.id ] );
 
     }
@@ -149,9 +151,8 @@ private class AddCampaignMembersByReportBatchableTest {
         String reportId = String.valueOf( reportList[0].id ).left( 15 );
         String campaignId = String.valueOf( camp.id ).left( 15 );
 
+        // since running with see all data then we must wipe out potential data
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
-
-        // delete existing settings
         delete settingsMap.values();
 
         // create one new setting for testing
@@ -160,10 +161,13 @@ private class AddCampaignMembersByReportBatchableTest {
             name = reportId,
             campaign_id__c = campaignId,
             report_contact_or_lead_id_column_label__c = 'Contact ID',
-            report_contact_or_lead_id_column_name__c = 'Contact_ID'
+            report_contact_or_lead_id_column_name__c = 'CONTACT_ID'
         );
 
         insert setting;
+
+        // since running with see all data then we must wipe out potential data
+        delete [ SELECT id FROM Add_Campaign_Members_by_Report_Log__c ];
 
         List<ID> leadOrContactIds = new List<ID>{ cont.id, ld.id };
 
@@ -204,10 +208,12 @@ private class AddCampaignMembersByReportBatchableTest {
 
         String reportId = String.valueOf( reportList[0].id ).left( 15 );
 
+        // since running with see all data then we must wipe out potential data
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
-
-        // delete existing settings
         delete settingsMap.values();
+
+        // since running with see all data then we must wipe out potential data
+        delete [ SELECT id FROM Add_Campaign_Members_by_Report_Log__c ];
 
         Test.startTest();
 
@@ -248,9 +254,8 @@ private class AddCampaignMembersByReportBatchableTest {
         String reportId = String.valueOf( reportList[0].id ).left( 15 );
         String campaignId = String.valueOf( camp.id ).left( 15 );
 
+        // since running with see all data then we must wipe out potential data
         Map<String, AddCampaignMembersByReportSetting__c> settingsMap = AddCampaignMembersByReportSetting__c.getAll();
-
-        // delete existing settings
         delete settingsMap.values();
 
         // create one new setting for testing
@@ -263,6 +268,9 @@ private class AddCampaignMembersByReportBatchableTest {
         );
 
         insert setting;
+
+        // since running with see all data then we must wipe out potential data
+        delete [ SELECT id FROM Add_Campaign_Members_by_Report_Log__c ];
 
         Test.startTest();
 
