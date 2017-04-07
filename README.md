@@ -20,9 +20,10 @@ Release 1.6
 
 * Fixed bug with custom report types, there was a case-sensitivity issue with column names.
 * Introduces "Add Campaign Members by Report Log" tab so you can see some information when errors occur. Managed packages hide Debug Log details so it was nearly impossible for me to help troubleshoot. Now you'll at least have some high level information that may help you solve the issue and/or help me know where to dig in further.
-* If error log records are generated then email is sent to all Salesforce Users listed in `Setup | Email Administration | Apex Exception Email` notifying them to review the error log records.
 
 ![screen shot](images/error-logs1.png)
+
+* If error log records are generated then email is sent to all Salesforce Users listed in `Setup | Email Administration | Apex Exception Email` notifying them to review the error log records.
 
 ![screen shot](images/error-logs2.png)
 
