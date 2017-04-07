@@ -121,8 +121,15 @@ Please consider voting for these ideas to increase the report subscription limit
 * [Increase Report Subscription Notifications](https://success.salesforce.com/ideaView?id=08730000000wk37AAA)
 
 
-There was an unexpected error while running an action for 'Some Report Name'
+Error: There was an unexpected error while running an action for 'Some Report Name'
 --------------------------------------------------------------------------------
 
 Salesforce automatically sends this email whenever a Report Subscription action encounters an error.
 The email does not contain any helpful information, but if you get this email then do check the **Add Campaign Members by Report Logs** tab for any error messages.
+
+
+Error: Missing custom setting AddCampaignMembersByReportSetting__c record with name "00OB0000000UKz0MAG"
+--------------------------------------------------------------------------------------------------------
+
+You need to use the "Add Campaign Member by Report Settings" tab and create a setting that maps your report to the campaign it will add members to.
+The alphanumeric value at end of the error message is the ID of the report that needs to be configured.
