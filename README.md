@@ -99,7 +99,7 @@ Getting Started
 FAQ
 ===
 
-Do I need to install the Non-Profit Starter Pack?
+Do I need to install the Non-Profit Success Pack?
 -------------------------------------------------
 
 No, this package uses a copy of the [SalesforceFoundation](https://github.com/SalesforceFoundation) [ReportService](https://github.com/SalesforceFoundation/CampaignTools/blob/master/src/classes/ReportService.cls) as part of their [CampaignTools](https://github.com/SalesforceFoundation/CampaignTools) package to support all records in a report beyond the 2,000 limit. I have included the two apex classes needed in this package. Just let the Salesforce Foundation know we appreciate them!
