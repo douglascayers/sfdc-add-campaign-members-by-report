@@ -2,9 +2,19 @@
  * Developed by Doug Ayers (douglascayers.com)
  * https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report
  */
-public with sharing class AddCampaignMembersByReportSchedulable implements Schedulable {
+global with sharing class AddCampaignMembersByReportSchedulable implements Schedulable {
 
-    public void execute( SchedulableContext context ) {
+    private Integer batchSize { get; set; }
+
+    global AddCampaignMembersByReportSchedulable() {
+        this( 200 );
+    }
+
+    global AddCampaignMembersByReportSchedulable( Integer batchSize ) {
+        this.batchSize = batchSize;
+    }
+
+    global void execute( SchedulableContext context ) {
 
         System.debug( 'AddCampaignMembersByReportSchedulable.execute: ' + context );
 
@@ -12,7 +22,7 @@ public with sharing class AddCampaignMembersByReportSchedulable implements Sched
 
             System.debug( setting );
 
-            Database.executeBatch( new AddCampaignMembersByReportBatchable( setting.name ) );
+            Database.executeBatch( new AddCampaignMembersByReportBatchable( setting.name ), this.batchSize );
 
         }
 
