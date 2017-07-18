@@ -72,9 +72,12 @@ public with sharing class AddCampaignMembersByReportBatchable implements Databas
 
             System.debug( 'AddCampaignMembersByReportBatchable.start: ' + context );
 
-            Iterable<Id> reportRowIdIterable = new NPSP_ReportService.ReportRowIdIterableIterator( this.reportId, this.columnName );
+            Iterable<ID> reportRowIdIterable = new NPSP_ReportService.ReportRowIdIterableIterator( this.reportId, this.columnName );
 
-            return (Iterable<ID>) reportRowIdIterable;
+            Iterator<ID> reportRowIdIterator = reportRowIdIterable.iterator();
+
+            // when running test ensure at most one batch execution will run, otherwise send back the real iterable
+            return (Iterable<ID>) ( ( Test.isRunningTest() && reportRowIdIterator.hasNext() ) ? new List<ID>{ reportRowIdIterator.next() } : reportRowIdIterable );
 
         } catch ( Exception e ) {
 
