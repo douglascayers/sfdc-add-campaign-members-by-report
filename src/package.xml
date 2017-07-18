@@ -34,6 +34,7 @@
     </types>
     <types>
         <members>Add_Campaign_Members_by_Report</members>
+        <members>Add_Campaign_Members_by_Report_Lightning</members>
         <name>CustomApplication</name>
     </types>
     <types>
