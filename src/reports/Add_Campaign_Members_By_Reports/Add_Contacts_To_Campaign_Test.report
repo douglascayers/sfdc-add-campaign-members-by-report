@@ -3,9 +3,6 @@
     <columns>
         <field>CONTACT_ID</field>
     </columns>
-    <columns>
-        <field>FIRST_NAME</field>
-    </columns>
     <description>Test report. https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report</description>
     <format>Tabular</format>
     <name>Add Contacts To Campaign Test</name>
