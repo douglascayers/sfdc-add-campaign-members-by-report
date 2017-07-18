@@ -100,6 +100,11 @@ public with sharing class NPSP_ReportService {
                 pageIndex
             ));
             metadata.setReportFilters(reportFilters);
+
+            String booleanFilter = metadata.getReportBooleanFilter();
+            if (String.isNotBlank(booleanFilter)) {
+                metadata.setReportBooleanFilter('(' + booleanFilter + ') AND ' + reportFilters.size());
+            }
         }
 
         Reports.ReportResults results = Reports.ReportManager.runReport(
