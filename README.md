@@ -12,12 +12,19 @@ Use reports to segment and filter the leads and contacts that matter to you then
 Packaged Release History
 ------------------------
 
-Release 1.6
+Release 1.7 (current)
 -----------
 * Install package
-  * [Production URL](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t46000000GzR5)
-  * [Sandbox URL](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t46000000GzR5)
+  * [Production URL](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t460000018JDj)
+  * [Sandbox URL](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t460000018JDj)
 
+* Fixes reports.InvalidReportMetadataException: [Some filter conditions are defined but not referenced in your filter logic.] [(issue 11)](https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report/issues/11)
+* Fixes System.UnexpectedException: No more than one executeBatch can be called from within a test method [(issue 10)](https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report/issues/10)
+* Expose AddCampaignMembersByReportSchedulable to subscriber orgs [(issue 9)](https://github.com/DouglasCAyers/sfdc-add-campaign-members-by-report/issues/9)
+
+
+Release 1.6
+-----------
 * Fixed bug with custom report types, there was a case-sensitivity issue with column names.
 * Introduces "Add Campaign Members by Report Log" tab so you can see some information when errors occur. Managed packages hide Debug Log details so it was nearly impossible for me to help troubleshoot. Now you'll at least have some high level information that may help you solve the issue and/or help me know where to dig in further.
 
@@ -34,6 +41,7 @@ Release 1.5
 * Introduces "Add Campaign Members by Report Settings" tab to easily configure which reports feed into which campaigns.
 * Supports reports where the Contact and/or Lead ID exists in the report multiple times. Recommend ensuring reports don't include duplicate ids for overall performance, but now duplicates won't cause the app to fail to add members to your campaigns.
 * Multi-lingual support for report column names. The label of a column name changes based on running user's language preference so now the code references the unique API column name instead.
+
 
 Earlier Releases
 ----------------
