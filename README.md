@@ -118,11 +118,18 @@ I have reached the limit of number of reports I can subscribe to, what can I do?
 
 At the time of this writing there is a limit of 5 reports any given user can [subscribe](https://help.salesforce.com/articleView?id=reports_subscribe_overview.htm&type=0&language=en_US&release=206.5) to at a time.
 
-Alternatively, you can [schedule a job](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm) to run periodically that will automatically run the reports for you. It's about as simple or simpler to do than setting up the **report subscription** you just need to do it in the [Developer Console](https://developer.salesforce.com/docs/atlas.en-us.apex_workbook.meta/apex_workbook/apex1_2.htm) to run the below snippet:
+Alternatively, you can [schedule a job](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_scheduler.htm) to run periodically that will automatically run the reports for you. It's about as simple or simpler to do than setting up the **report subscription**.
 
-    // schedule job to run at 3am every day
-    String cron = '0 0 3 * * ?';
-    System.schedule( 'AddCampaignMembersJob-' + DateTime.now().getTime(), cron, new AddCampaignMembersByReportSchedulable() );
+1. In **Setup**, navigate to **Develop | Apex Classes**
+2. Click the **Schedule Apex** button
+3. Enter **AddCampaignMembersByReportSchedulable** for Job Name and Apex Class inputs
+4. Choose your desired frequency then click **Save** button
+
+![screen shot](images/schedule-job.png)
+
+You can review your scheduled job status in **Setup** at **Jobs | Scheduled Jobs**.
+
+When the scheduled job runs then it will enqueue a batch job, one per record configured in **Add Campaign Members by Report Settings**.
 
 Please consider voting for these ideas to increase the report subscription limit:
 * [Increase the limit on the number of reports a user can subscribe to](https://success.salesforce.com/ideaView?id=08730000000DkodAAC)
