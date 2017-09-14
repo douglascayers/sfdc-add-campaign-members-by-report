@@ -1,6 +1,5 @@
-@isTest
-private class AddCampaignMembersByReportLoggerTest {
-
-    // TODO
-
+public with sharing class AddCampaignMembersByReportLoggerTest {
+	public AddCampaignMembersByReportLoggerTest() {
+		
+	}
 }

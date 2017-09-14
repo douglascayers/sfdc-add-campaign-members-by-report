@@ -5,6 +5,7 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>BarPrefix__c</fullName>
+        <deprecated>false</deprecated>
         <description>The namespace with double underscore suffix &apos;ns__&apos;</description>
         <externalId>false</externalId>
         <inlineHelpText>The namespace with double underscore suffix &apos;ns__&apos;</inlineHelpText>
@@ -17,6 +18,7 @@
     </fields>
     <fields>
         <fullName>DotPrefix__c</fullName>
+        <deprecated>false</deprecated>
         <description>The namespace with dot suffix &apos;ns.&apos;</description>
         <externalId>false</externalId>
         <inlineHelpText>The namespace with dot suffix &apos;ns.&apos;</inlineHelpText>
@@ -29,6 +31,7 @@
     </fields>
     <fields>
         <fullName>RawPrefix__c</fullName>
+        <deprecated>false</deprecated>
         <description>Just the namespace &apos;ns&apos;</description>
         <externalId>false</externalId>
         <inlineHelpText>Just the namespace &apos;ns&apos;</inlineHelpText>
