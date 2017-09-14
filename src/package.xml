@@ -67,7 +67,6 @@
         <name>Layout</name>
     </types>
     <types>
-        <members>AddCampaignMembersByReportSetting__c.All</members>
         <members>Add_Campaign_Members_by_Report_Log__c.All</members>
         <name>ListView</name>
     </types>
