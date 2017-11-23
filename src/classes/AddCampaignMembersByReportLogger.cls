@@ -60,7 +60,7 @@ public with sharing class AddCampaignMembersByReportLogger {
 
         if ( count > 0 ) {
 
-            List<ID> usersToNotify = new List<ID>();
+            Set<ID> usersToNotify = new Set<ID>{ UserInfo.getUserId() };
 
             for ( ApexEmailNotification notif : [ SELECT userId FROM ApexEmailNotification WHERE userId != null LIMIT 100 ] ) {
                 usersToNotify.add( notif.userId );
@@ -69,7 +69,7 @@ public with sharing class AddCampaignMembersByReportLogger {
             if ( usersToNotify.size() > 0 ) {
 
                 Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
-                message.toAddresses = usersToNotify;
+                message.toAddresses = new List<ID>( usersToNotify );
                 message.subject = 'Errors: Add Campaign Members by Report Logs';
                 message.plainTextBody = 'Errors have occurred. Please review the log records for more details ' +
                                         URL.getSalesforceBaseURL().toExternalForm() + '/' + Add_Campaign_Members_by_Report_Log__c.sObjectType.getDescribe().getKeyPrefix();
